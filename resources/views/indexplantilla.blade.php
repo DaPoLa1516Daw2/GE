@@ -5,7 +5,7 @@
         <title>Gestor Escolar</title>
         @yield('headerData')
     </head>
-    <body>
+    <body class="container">
         @yield('cabe')
         @yield('contenido')
         @yield('pie')

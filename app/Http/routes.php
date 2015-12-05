@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function (){
     return view('index');
 });
+
+Route::get('/insert', function (){
+    $query = DB::select('SELECT Nombre FROM Curso');
+    return view('insert', ['estado' => Input::get('a'), 'cursos' => $query]);
+});
+
+Route::post('/insertDataCurso', 'DbEdit@setCurso');
+Route::post('/insertDataAssignatura', 'DbEdit@setAssignatura');
+Route::post('/insertDataAlumno', 'DbEdit@setAlumno');
+
+Route::get('/cursos', 'DbGet@getCurso');
+Route::get('/assignaturas', 'DbGet@getAssignatura');
+Route::get('/alumnos', 'DbGet@getAlumno');

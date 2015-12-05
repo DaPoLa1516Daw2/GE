@@ -1,6 +1,5 @@
 @extends('headerData')
 
 @section('contenido')
-    <p>Contenido</p>
-
+    <p>Insert data success</p>
 @endsection
