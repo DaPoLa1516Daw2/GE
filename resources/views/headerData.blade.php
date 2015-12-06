@@ -38,6 +38,7 @@
                             <li><a href="/insert?a=1">Curso/s</a></li>
                             <li><a href="/insert?a=2">Assignatura/s</a></li>
                             <li><a href="/insert?a=3">Alumno</a></li>
+                            <li><a href="/notas">Notas</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">

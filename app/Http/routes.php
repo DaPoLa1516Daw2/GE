@@ -20,6 +20,20 @@ Route::get('/insert', function (){
     return view('insert', ['estado' => Input::get('a'), 'cursos' => $query]);
 });
 
+Route::get('/notas', function (){
+    $query = DB::select('SELECT * FROM Alumno');
+    return view('nota', ['alumnos' => $query]);
+});
+
+Route::get('/notaEdit', function (){
+    $query = DB::select('SELECT Alumno.Nombre AS Alumno, Assignatura.Nombre AS Assignatura, Nota.Nota AS Nota FROM Nota
+                        JOIN Alumno ON Alumno.ID = Nota.ID_Alumno
+                        JOIN Assignatura ON Assignatura.ID = Nota.ID_Assignatura
+                        WHERE Alumno.ID = ?', [Input::get('id')]);
+    return view('notaEdit', ['alumno' => $query]);
+});
+
+Route::post('/change', 'DbEdit@setNota');
 Route::post('/insertDataCurso', 'DbEdit@setCurso');
 Route::post('/insertDataAssignatura', 'DbEdit@setAssignatura');
 Route::post('/insertDataAlumno', 'DbEdit@setAlumno');

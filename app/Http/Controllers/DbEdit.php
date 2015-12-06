@@ -16,24 +16,43 @@ class DbEdit extends Controller
 {
     public function setCurso(Request $peticion)
     {
-        $query = DB::insert('INSERT INTO Curso(ID, Nombre) VALUES (NULL,?)',[$peticion -> input('Nombre')]);
-        if(!$query)
-        {
-            return view('error');
-        }else
-        {
+        if(count($peticion -> input('Nombre')) == 1) {
+            $query = DB::insert('INSERT INTO Curso(ID, Nombre) VALUES (NULL,?)', [$peticion->input('Nombre')[0]]);
+            if (!$query) {
+                return view('error');
+            } else {
+                return view('success');
+            }
+        } else {
+            DB::beginTransaction();
+            for($i = 0; $i < count($peticion -> input('Nombre')); $i++)
+            {
+                DB::insert('INSERT INTO Curso(ID, Nombre) VALUES (NULL,?)', [$peticion->input('Nombre')[$i]]);
+            }
+            DB::commit();
             return view('success');
         }
     }
 
     public function setAssignatura(Request $peticion)
     {
-        $query = DB::insert('INSERT INTO Assignatura(ID, Nombre, ID_Curso) VALUES (NULL,?,(SELECT ID FROM Curso WHERE Nombre = ?))', [$peticion -> input('Nombre'),$peticion -> input('Curso')]);
-        if(!$query)
+        if(count($peticion -> input('Nombre')) == 1)
         {
-            return view('error');
-        }else
-        {
+            $query = DB::insert('INSERT INTO Assignatura(ID, Nombre, ID_Curso) VALUES (NULL,?,(SELECT ID FROM Curso WHERE Nombre = ?))',
+                [$peticion->input('Nombre')[0], $peticion->input('Curso')]);
+            if (!$query) {
+                return view('error');
+            } else {
+                return view('success');
+            }
+        } else {
+            DB::beginTransaction();
+            for($i = 0; $i < count($peticion -> input('Nombre')); $i++)
+            {
+                DB::insert('INSERT INTO Assignatura(ID, Nombre, ID_Curso) VALUES (NULL,?,(SELECT ID FROM Curso WHERE Nombre = ?))',
+                    [$peticion->input('Nombre')[$i], $peticion->input('Curso')]);
+            }
+            DB::commit();
             return view('success');
         }
     }
@@ -53,6 +72,24 @@ class DbEdit extends Controller
         }
         DB::commit();
 
+        return view('success');
+    }
+
+    public function setNota(Request $peticion)
+    {
+        $items = array(
+            $peticion -> input('Alumno'),
+            $peticion -> input('Assignatura'),
+            $peticion -> input('Nota')
+        );
+        DB::beginTransaction();
+        for($i = 0; $i < count($items[1]); $i++)
+        {
+            DB::update('UPDATE Nota SET Nota = ? WHERE ID_Assignatura =
+                      (SELECT ID FROM Assignatura WHERE Nombre = ?) AND ID_Alumno =
+                      (SELECT ID FROM Alumno WHERE Nombre = ?)', [$items[2][$i],$items[1][$i],$items[0]]);
+        }
+        DB::commit();
         return view('success');
     }
 }
