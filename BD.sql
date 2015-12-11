@@ -26,6 +26,6 @@ CREATE TABLE IF NOT EXISTS Nota(
 	ID_Alumno INTEGER NOT NULL,
 	Nota INT,
 	CONSTRAINT PK_Nota PRIMARY KEY(ID_Assignatura,ID_Alumno),
-	CONSTRAINT FK_Nota_Curso FOREIGN KEY (ID_Assignatura) REFERENCES Curso(ID),
+	CONSTRAINT FK_Nota_Assignatura FOREIGN KEY (ID_Assignatura) REFERENCES Assignatura(ID),
 	CONSTRAINT FK_Nota_Alumno FOREIGN KEY (ID_Alumno) REFERENCES Alumno(ID)
 );

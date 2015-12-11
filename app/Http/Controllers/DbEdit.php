@@ -65,7 +65,7 @@ class DbEdit extends Controller
             return view('error');
         }
         DB::beginTransaction();
-        $Alumno = DB::insert('INSERT INTO Alumno(ID, Nombre, Apellido, DNI) VALUES (NULL , ?, ?,?)', [$peticion->input('Nombre'), $peticion->input('Apellido'), $peticion->input('DNI')]);
+        DB::insert('INSERT INTO Alumno(ID, Nombre, Apellido, DNI) VALUES (NULL, ?, ?, ?)', [$peticion->input('Nombre'), $peticion->input('Apellido'), $peticion->input('DNI')]);
         $ID_alumno = DB::select('SELECT ID FROM Alumno WHERE DNI = ?', [$peticion->input('DNI')]);
         foreach ($Assignaturas as $Assignatura) {
             DB::insert('INSERT INTO Nota(ID_Assignatura, ID_Alumno, Nota) VALUES (?,?, NULL)', [$Assignatura->ID, $ID_alumno[0]->ID]);

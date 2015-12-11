@@ -38,6 +38,8 @@ Route::post('/insertDataCurso', 'DbEdit@setCurso');
 Route::post('/insertDataAssignatura', 'DbEdit@setAssignatura');
 Route::post('/insertDataAlumno', 'DbEdit@setAlumno');
 
+Route::get('/prueba', 'DbGet@verNotas');
+
 Route::get('/cursos', 'DbGet@getCurso');
 Route::get('/assignaturas', 'DbGet@getAssignatura');
 Route::get('/alumnos', 'DbGet@getAlumno');

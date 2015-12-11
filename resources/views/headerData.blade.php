@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">GT</a>
+                <a class="navbar-brand" href="/">GE</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -61,6 +61,6 @@
 
 @section('pie')
     <footer class="row">
-        <div class="col-sm-12" style="text-align: center;"><b>M07UF03 | David Postigo | Oscar Viciana | GT</b></div>
+        <div class="col-sm-12" style="text-align: center;"><b>M07UF03 | David Postigo | Oscar Viciana | GE</b></div>
     </footer>
 @endsection
