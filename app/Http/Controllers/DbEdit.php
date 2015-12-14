@@ -8,12 +8,25 @@
 
 namespace App\Http\Controllers;
 
+
 use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+/**
+ * Classe encargada de las inserciones en la Base da datos
+ * Class DbEdit
+ * @package App\Http\Controllers
+ *
+ */
 class DbEdit extends Controller
 {
+    /**
+     * funcion encargada de introducir cursos
+     * @param Request $peticion
+     * @return mixed vista success en caso de que todo sea correcto en casso contrari te envia a error
+     *
+     */
     public function setCurso(Request $peticion)
     {
         if(count($peticion -> input('Nombre')) == 1) {
@@ -34,6 +47,11 @@ class DbEdit extends Controller
         }
     }
 
+    /**
+     * funcion encargada de introducir assignaturas
+     * @param Request $peticion
+     * @return mixed vista success en caso de que todo sea correcto en casso contrari te envia a error
+     */
     public function setAssignatura(Request $peticion)
     {
         if(count($peticion -> input('Nombre')) == 1)
@@ -57,6 +75,11 @@ class DbEdit extends Controller
         }
     }
 
+    /**
+     * Funcion encargada de la insercion de alumnos
+     * @param Request $peticion
+     * @return mixed vista success en caso de que todo sea correcto en casso contrari te envia a error
+     */
     public function setAlumno(Request $peticion)
     {
         $Assignaturas = DB::select('SELECT ID FROM Assignatura WHERE ID_Curso = (SELECT ID FROM Curso WHERE Nombre = ?)', [$peticion -> input('Curso')]);
@@ -75,6 +98,11 @@ class DbEdit extends Controller
         return view('success');
     }
 
+    /**
+     * Funcion encargada de introducir las notas en la Base de datos
+     * @param Request $peticion
+     * @return mixed vista success en caso de que todo sea correcto
+     */
     public function setNota(Request $peticion)
     {
         $items = array(

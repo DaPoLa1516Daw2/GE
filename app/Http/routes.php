@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function (){
     return view('index');
 });
@@ -33,11 +34,17 @@ Route::get('/notaEdit', function (){
     return view('notaEdit', ['alumno' => $query]);
 });
 
+/**
+ * rutas de insercion de  datos
+ */
 Route::post('/change', 'DbEdit@setNota');
 Route::post('/insertDataCurso', 'DbEdit@setCurso');
 Route::post('/insertDataAssignatura', 'DbEdit@setAssignatura');
 Route::post('/insertDataAlumno', 'DbEdit@setAlumno');
 
+/**
+ * rutas de visionado de datos
+ */
 Route::get('/prueba', 'DbGet@verNotas');
 
 Route::get('/cursos', 'DbGet@getCurso');

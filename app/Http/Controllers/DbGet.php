@@ -13,14 +13,27 @@ use Imagick;
 use ImagickDraw;
 use App\Http\Controllers\Controller;
 
+/**
+ * Clase encargada de hacer las periciones a la base de datos
+ * Class DbGet
+ * @package App\Http\Controllers
+ */
 class DbGet extends Controller
 {
+    /**
+     * funcion encargada de obtener los cursos
+     * @return mixed
+     */
     public function getCurso()
     {
         $query = DB::select('SELECT * FROM Curso');
         return view('tablaDatos', ['cursos' => $query, 'estado' => 1]);
     }
 
+    /**
+     * funcion encargada de obtener las asignaturas
+     * @return mixed
+     */
     public function getAssignatura()
     {
         $query = DB::select('SELECT Assignatura.ID AS "ID", Assignatura.Nombre AS "Nombre", Curso.Nombre AS "Curso"
@@ -28,12 +41,20 @@ class DbGet extends Controller
         return view('tablaDatos', ['assignaturas' => $query, 'estado' => 2]);
     }
 
+    /**
+     * funcion encargada de obtener los alumnos
+     * @return mixed
+     */
     public function getAlumno()
     {
         $query = DB::select('SELECT * FROM Alumno');
         return view('tablaDatos', ['alumnos' => $query, 'estado' => 3]);
     }
 
+    /**
+     * funcion encargada de recuperar las notas
+     * @return mixed
+     */
     public function verNotas()
     {
         $values = array();
@@ -48,6 +69,14 @@ class DbGet extends Controller
         return view('grafico');
     }
 
+
+
+
+    /**
+     * Funcion encargada de generar las graficas
+     * @param $values los datos de la consulta SQL
+     * @param $max el valor maximo de la consulta
+     */
     public function genGrafica($values, $max)
     {
         $secion = 800/count($values);
