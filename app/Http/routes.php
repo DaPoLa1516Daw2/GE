@@ -46,6 +46,7 @@ Route::post('/insertDataAlumno', 'DbEdit@setAlumno');
  * rutas de visionado de datos
  */
 Route::get('/prueba', 'DbGet@verNotas');
+Route::get('/prueba', 'DbGet@aprobado');
 
 Route::get('/cursos', 'DbGet@getCurso');
 Route::get('/assignaturas', 'DbGet@getAssignatura');

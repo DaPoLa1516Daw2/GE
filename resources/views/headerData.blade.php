@@ -50,6 +50,7 @@
                             <li><a href="/assignaturas">Assignaturas</a></li>
                             <li><a href="/alumnos">Alumnos</a></li>
                             <li role="separator" class="divider"></li>
+                            <li><a href="/aprovado">Aprovados por curso</a></li>
                         </ul>
                     </li>
                 </ul>

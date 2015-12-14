@@ -69,6 +69,28 @@ class DbGet extends Controller
         return view('grafico');
     }
 
+    public function aprobado(){
+
+
+        $consulta_Aprovado = DB::select('SELECT  "Aprovado" AS Referencia, count(*) as Valor from nota
+                                JOIN assignatura ON assignatura.ID = nota.ID_assignatura
+                                WHERE nota >= 5 and ID_Curso = (
+                                select id from curso where nombre = "DAW")
+                                ');
+        $consulta_Suspendido = DB::select('SELECT  "Suspendido" AS Referencia, count(*) as Valor from nota
+                                JOIN assignatura ON assignatura.ID = nota.ID_assignatura
+                                WHERE nota < 5 and ID_Curso = (
+                                select id from curso where nombre = "DAW")
+                                ');
+
+        $values[0] = array($consulta_Aprovado -> Referencia, (int)$consulta_Aprovado -> Valor);
+        $values[1] = array($consulta_Suspendido -> Referencia, (int)$consulta_Suspendido -> Valor);
+
+        $this->genGrafica($values,10);
+        return view('grafico');
+
+    }
+
 
 
 
